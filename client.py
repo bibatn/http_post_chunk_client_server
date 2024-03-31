@@ -7,17 +7,17 @@ def print_chunks(host, port):
     conn.request("POST", "/", body, headers)
     response = conn.getresponse()
     if response.status == 200:
-        # chunk = response.readline()
-        # print(chunk)
-        while True:
-            chunk_size_hex = response.fp.read(1)
-            if not chunk_size_hex:
-                break
-            chunk_size = int(chunk_size_hex, 16)
-            response.fp.read(2)  # Consume CRLF before chunk
-            chunk = response.fp.read(chunk_size)
-            print(chunk.decode('utf-8'))
-            response.fp.read(2)  # Consume CRLF after chunk
+        chunk = response.readline()
+        print(chunk)
+        # while True:
+            # chunk_size_hex = response.fp.read(1)
+            # if not chunk_size_hex:
+            #     break
+            # chunk_size = int(chunk_size_hex, 16)
+            # response.fp.read(2)  # Consume CRLF before chunk
+            # chunk = response.fp.read(chunk_size)
+            # print(chunk.decode('utf-8'))
+            # response.fp.read(2)  # Consume CRLF after chunk
 
     conn.close()
 
